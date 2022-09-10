@@ -6,6 +6,6 @@ import retrofit2.http.GET
 
 interface Service {
     @GET(GET_CITY)
-    suspend fun weatherCityByName(): Call<WeatherData>
+    suspend fun weatherCityByName(): WeatherData
 
 }

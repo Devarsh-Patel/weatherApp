@@ -1,6 +1,16 @@
 package com.example.weatherapp.model
 
-import com.google.gson.annotations.SerializedName
+
+data class City(
+    val name: String?,
+    val imageURLS: ImageURLs,
+    val population: Int?,
+    val country_code: String?,
+    val androidImageURLs: AndroidImageURLs?,
+    val timezone: String?,
+    val elevation: String?
+)
+/*
 
 data class City(
     @SerializedName("admin1 code")
@@ -31,4 +41,4 @@ data class City(
     var name: String?, // Calera
     var population: Int?, // 13213
     var timezone: String? // America/Chicago
-)
+)*/

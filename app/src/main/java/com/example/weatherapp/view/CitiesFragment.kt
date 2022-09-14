@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.databinding.ListWeatherDetailsBinding
+import com.example.weatherapp.model.Forecasts
 import com.example.weatherapp.model.Location
 import com.example.weatherapp.view.adapter.CityAdapter
 import com.example.weatherapp.viewModel.CitiesViewModel
@@ -57,16 +59,30 @@ class CitiesFragment: Fragment() {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         }
         binding.searchList.adapter = adapter
-        binding.searchList.layoutManager= LinearLayoutManager(context)
+        binding.searchList.layoutManager= LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     private fun initObservables() {
-        viewModel.cities.observe(viewLifecycleOwner){
-            binding.txtCity.text = it.city
+        viewModel.cities.observe(viewLifecycleOwner){ city ->
+            binding.txtCity.text = city.city
+            binding.txtCity.isVisible = true
+            binding.txtCity.setOnClickListener {
+                Toast.makeText(context, city.city, Toast.LENGTH_SHORT).show()
+                binding.txtCity.isVisible = false
+                binding.txtCityState.text = " ${city.city}, ${city.region}"
+            }
+        }
+
+        viewModel.forecasts.observe(viewLifecycleOwner){
+            updateIt(it)
+        }
+
+        viewModel.currentObservation.observe(viewLifecycleOwner){
+            binding.txtTemp.text= it.condition.temperature.toString()
         }
     }
 
-    /*private fun updateIt(it: Location) {
+    private fun updateIt(it: List<Forecasts>) {
         adapter.submitList(it)
-    }*/
+    }
 }

@@ -6,29 +6,31 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.CityCardViewBinding
+import com.example.weatherapp.model.Forecasts
 import com.example.weatherapp.model.Location
 
 class CityAdapter(private val searchCity: (String) -> Unit):
-    ListAdapter<Location, CityAdapter.CityViewHolder>(CityDifficult) {
+    ListAdapter<Forecasts, CityAdapter.CityViewHolder>(CityDifficult) {
 
     class CityViewHolder(private val binding: CityCardViewBinding)
         :RecyclerView.ViewHolder(binding.root){
-        fun onBind(data: Location,
+        fun onBind(data: Forecasts,
         showDetails: (String) -> Unit){
-            binding.txtCityName.text = data.city
-            binding.root.setOnClickListener {
-                showDetails(data.city)
-            }
+            binding.txtDay.text = data.day
+            binding.txtCloudy.text = data.text
+            /*binding.root.setOnClickListener {
+                showDetails(data.day)
+            }*/
         }
     }
 
-    object CityDifficult: DiffUtil.ItemCallback<Location>(){
-        override fun areItemsTheSame(oldItem: Location, newItem: Location): Boolean {
+    object CityDifficult: DiffUtil.ItemCallback<Forecasts>(){
+        override fun areItemsTheSame(oldItem: Forecasts, newItem: Forecasts): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Location, newItem: Location): Boolean {
-            return oldItem.city == newItem.city
+        override fun areContentsTheSame(oldItem: Forecasts, newItem: Forecasts): Boolean {
+            return oldItem.day == newItem.day
         }
 
     }

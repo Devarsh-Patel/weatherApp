@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.weatherapp.databinding.ListWeatherDetailsBinding
-import com.example.weatherapp.model.City
+import com.example.weatherapp.model.Location
 import com.example.weatherapp.view.adapter.CityAdapter
 import com.example.weatherapp.viewModel.CitiesViewModel
 
@@ -62,11 +62,11 @@ class CitiesFragment: Fragment() {
 
     private fun initObservables() {
         viewModel.cities.observe(viewLifecycleOwner){
-            updateIt(it)
+            binding.txtCity.text = it.city
         }
     }
 
-    private fun updateIt(it: List<City?>?) {
+    /*private fun updateIt(it: Location) {
         adapter.submitList(it)
-    }
+    }*/
 }

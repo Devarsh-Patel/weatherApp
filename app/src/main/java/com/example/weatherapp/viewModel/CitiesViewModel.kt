@@ -1,20 +1,22 @@
 package com.example.weatherapp.viewModel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.weatherapp.data.API
-import com.example.weatherapp.model.City
+import com.example.weatherapp.model.Location
 import com.example.weatherapp.model.WeatherData
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+private const val TAG = "CitiesViewModel"
 class CitiesViewModel: ViewModel() {
 
-    private val _cities = MutableLiveData<List<City?>?>()
+    private val _cities = MutableLiveData<Location>()
 
-    val cities: MutableLiveData<List<City?>?>
+    val cities: MutableLiveData<Location>
      get() = _cities
 
     private val _errorMessages = MutableLiveData("")
@@ -34,7 +36,8 @@ class CitiesViewModel: ViewModel() {
 
                         if(response.isSuccessful){
                             response.body()?.let {
-                                _cities.value = it.cities
+                                _cities.value = it.location
+                                Log.d(TAG, "onResponse:::::::::::::::::::::: ${it.location}")
                             } ?: kotlin.run {
                                 _errorMessages.value = response.message()
                             }

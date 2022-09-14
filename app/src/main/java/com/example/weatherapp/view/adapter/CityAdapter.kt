@@ -6,29 +6,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.databinding.CityCardViewBinding
-import com.example.weatherapp.model.City
+import com.example.weatherapp.model.Location
 
 class CityAdapter(private val searchCity: (String) -> Unit):
-    ListAdapter<City, CityAdapter.CityViewHolder>(CityDifficult) {
+    ListAdapter<Location, CityAdapter.CityViewHolder>(CityDifficult) {
 
     class CityViewHolder(private val binding: CityCardViewBinding)
         :RecyclerView.ViewHolder(binding.root){
-        fun onBind(data: City,
+        fun onBind(data: Location,
         showDetails: (String) -> Unit){
-            binding.txtCityName.text = data.name
+            binding.txtCityName.text = data.city
             binding.root.setOnClickListener {
-                data.name?.let { city -> showDetails(city) }
+                showDetails(data.city)
             }
         }
     }
 
-    object CityDifficult: DiffUtil.ItemCallback<City>(){
-        override fun areItemsTheSame(oldItem: City, newItem: City): Boolean {
+    object CityDifficult: DiffUtil.ItemCallback<Location>(){
+        override fun areItemsTheSame(oldItem: Location, newItem: Location): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: City, newItem: City): Boolean {
-            return oldItem.name == newItem.name
+        override fun areContentsTheSame(oldItem: Location, newItem: Location): Boolean {
+            return oldItem.city == newItem.city
         }
 
     }

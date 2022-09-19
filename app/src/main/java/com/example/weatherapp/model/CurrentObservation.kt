@@ -3,6 +3,7 @@ package com.example.weatherapp.model
 data class CurrentObservation (
     val wind: Wind,
     val atmosphere: Atmosphere,
+    val astronomy: Astronomy,
     val condition: Condition
     )
 
@@ -16,6 +17,11 @@ data class Atmosphere(
     val humidity: Int,
     val visibility: Double,
     val pressure: Double
+)
+
+data class Astronomy(
+    val sunrise: String,
+    val sunset: String
 )
 
 data class Condition(

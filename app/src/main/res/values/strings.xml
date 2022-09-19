@@ -4,4 +4,13 @@
     <string name="weather_images">weather_images</string>
     <string name="city_name_and_state">city name and state</string>
     <string name="temperature">temperature</string>
+    <string name="chill">chill</string>
+    <string name="direction">direction</string>
+    <string name="speed">speed</string>
+    <string name="humidity">humidity</string>
+    <string name="visibility">visibility</string>
+    <string name="pressure">pressure</string>
+    <string name="sunrise">sunrise</string>
+    <string name="sunset">sunset</string>
+    <string name="text">text</string>
 </resources>
